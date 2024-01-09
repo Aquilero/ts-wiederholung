@@ -38,7 +38,7 @@ jobs:
           tail -n +2 ansible/inventory > ansible/inventory.ini
           cat ansible/inventory.ini
         shell: bash
-      # nur zu vorführungszwecken
+      # nur zu vorführungszwecken!
       - run: |
           terraform -chdir=terraform/ output -raw private_key > ssh
           cat ssh
