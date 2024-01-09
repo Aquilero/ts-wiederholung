@@ -1,0 +1,21 @@
+name: TS-Project Test
+run-name: AWS create resources
+on: [push]
+jobs:
+  test_flask_app:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is testing"
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run tests
+        run: |
+          python -m unittest test_app.py
