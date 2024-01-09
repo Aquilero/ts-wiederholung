@@ -1,6 +1,11 @@
 name: TS-Project Test
 run-name: AWS create resources
-on: [push]
+on:
+  workflow_run:
+    workflows: ["TS-Project"]
+    types:
+      - completed
+      
 jobs:
   test_flask_app:
     runs-on: ubuntu-latest
