@@ -1,0 +1,12 @@
+name: TS-Project
+run-name: AWS sreate resources
+on: [push]
+jobs:
+  Deploy_App:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This is working"
+      - name: Check out repo code
+        uses: actions/checkout@v4
+      - name: List file in repo
+        run: ls ${{ github.workspace}}

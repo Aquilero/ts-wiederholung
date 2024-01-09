@@ -3,7 +3,7 @@ resource "tls_private_key" "key" {
 }
 
 resource "aws_key_pair" "aws_key" {
-  key_name = "ue131_grafana"
+  key_name = "ansible-ssh-key"
   public_key = tls_private_key.key.public_key_openssh
 }
 
