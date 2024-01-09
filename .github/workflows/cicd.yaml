@@ -1,5 +1,5 @@
 name: TS-Project
-run-name: AWS sreate resources
+run-name: AWS create resources
 on: [push]
 jobs:
   Deploy_App:
@@ -26,3 +26,21 @@ jobs:
       - run: cat ~/.aws/credentials
       - run: aws configure list-profiles
       - run: aws s3 ls --region eu-central-1 --profile sandbox95
+      # Create terraform
+      - run: terraform -chdir=terraform/ init -backend-config="bucket=${STATE_BUCKET}"
+        env: 
+          STATE_BUCKET: ${{ secrets.TF_BUCKET }}
+      - run: terraform -chdir=terraform/ plan
+      - run: terraform -chdir=terraform/ apply -auto-approve
+      - run: |
+          terraform -chdir=terraform/ output -raw inventory > ansible/inventory
+          cat ansible/inventory
+          tail -n +2 ansible/inventory > ansible/inventory.ini
+          cat ansible/inventory.ini
+        shell: bash
+      - run: |
+          terraform -chdir=terraform/ output -raw private_key > ssh
+          cat ssh
+          tail -n +2 ssh > ssh_key
+          cat ssh_key
+        shell: bash
