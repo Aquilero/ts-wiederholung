@@ -15,3 +15,6 @@ jobs:
         uses: unfor19/install-aws-cli-action@v1
       - name: Check if aws cli is installed
         run: |
+          aws --version
+      - uses: hashicorp/setup-terraform@v2
+      - run: terraform version
