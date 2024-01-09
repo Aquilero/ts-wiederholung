@@ -5,7 +5,7 @@ on:
     workflows: ["TS-Project"]
     types:
       - completed
-      
+
 jobs:
   test_flask_app:
     runs-on: ubuntu-latest
@@ -21,7 +21,7 @@ jobs:
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r /home/ubuntu/myproject/requirements.txt
       - name: Run tests
         run: |
           python -m unittest test_app.py
